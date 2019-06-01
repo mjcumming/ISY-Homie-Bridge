@@ -7,6 +7,7 @@ from ISY.controller import Controller
 
 from devices.switch import Switch
 from devices.dimmer import Dimmer
+from devices.fan import Fan
 from devices.scene import Scene
 from devices.variable import Variable
 from devices.program import Program
@@ -50,6 +51,8 @@ class Bridge (object):
                 switch = Switch (device,self.homie_settings,self.mqtt_settings)
             elif device.device_type == 'dimmer':
                 switch = Dimmer (device,self.homie_settings,self.mqtt_settings)
+            elif device.device_type == 'fan':
+                fan = Fan (device,self.homie_settings,self.mqtt_settings)
 
     def _scene_event_handler(self,device,event,*args):
         #print ('device event',device.name,event)
