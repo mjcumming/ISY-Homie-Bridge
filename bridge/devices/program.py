@@ -25,7 +25,7 @@ class Program (Base,Device_Base):
         self.status = Property_String (node,'status','Status')
         node.add_property (self.status)
 
-        self.run = Property_Enum (node,id='run',name='Run Program',data_format='RUNIF,RUNTHEN,RUNELSE,STOP',value=isy_device.get_property('state'),set_value = self.set_run_program)
+        self.run = Property_Enum (node,id='run',name='Run Program',data_format='RUNIF,RUNTHEN,RUNELSE,STOP',set_value = self.set_run_program)
         node.add_property (self.run)
 
         self.start()
