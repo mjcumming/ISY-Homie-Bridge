@@ -2,6 +2,15 @@
 
 import time
 
+import platform
+
+if platform.system() == 'Windows':
+    pass
+    #win32file._setmaxstdio(2048)
+else:
+    import resource
+    resource.setrlimit(resource.RLIMIT_NOFILE, (65536, 65536))
+
 from ISY.controller import Controller
 
 from .devices.switch import Switch

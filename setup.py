@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 
 setuptools.setup(name='ISY994 Homie3 Bridge',
-      version='0.0.3',
+      version='0.0.7',
       description='Homie 3 for Universal Devices ISY994',
       author='Michael Cumming',
       author_email='mike@4831.com',
@@ -22,6 +22,7 @@ setuptools.setup(name='ISY994 Homie3 Bridge',
         'Homie3',
         'ISY994v5',
         'pyyaml',
+        'timer3'
     ],
     scripts=['isy_homie_start.py'],
 )
