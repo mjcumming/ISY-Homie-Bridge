@@ -1,7 +1,7 @@
 
 import time
 
-from bridge import Bridge
+from bridge.bridge import Bridge
 
 
 MQTT_SETTINGS = {

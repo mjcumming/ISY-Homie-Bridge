@@ -4,14 +4,14 @@ import time
 
 from ISY.controller import Controller
 
-from devices.switch import Switch
-from devices.dimmer import Dimmer
-from devices.fan import Fan
-from devices.contact import Contact
-from devices.controller_action import Controller_Action
-from devices.scene import Scene
-from devices.variable import Variable
-from devices.program import Program
+from .devices.switch import Switch
+from .devices.dimmer import Dimmer
+from .devices.fan import Fan
+from .devices.contact import Contact
+from .devices.controller_action import Controller_Action
+from .devices.scene import Scene
+from .devices.variable import Variable
+from .devices.program import Program
 
 import logging
 
