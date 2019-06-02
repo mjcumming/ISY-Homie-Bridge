@@ -22,7 +22,7 @@ HOMIE_SETTINGS = {
     'implementation' : 'HomieV3', 
 }
 
-
+ 
 url = '192.168.1.213'
 
 if __name__ == "__main__":
