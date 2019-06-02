@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 
-setuptools.setup(name='ISY993 to Homie 3 Bridge',
+setuptools.setup(name='ISY994 to Homie 3 Bridge',
       version='0.0.1',
       description='Homie 3 for Universal Devices ISY994',
       author='Michael Cumming',
