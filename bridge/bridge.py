@@ -19,6 +19,15 @@ logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)
 
 
+HOMIE_SETTINGS = {
+    'version' : '3.0.1',
+    'topic' : 'homie', 
+    'fw_name' : 'isy994',
+    'fw_version' : '0.0.1', 
+    'update_interval' : 60, 
+    'implementation' : 'HomieV3', 
+}
+
 
 class Bridge (object):
     
@@ -26,7 +35,7 @@ class Bridge (object):
 
     homie_devices = {} #indexed by container_type,device_address
 
-    def __init__(self, address=None, username=None, password=None, homie_settings=None, mqtt_settings=None):
+    def __init__(self, address=None, username=None, password=None, homie_settings=HOMIE_SETTINGS, mqtt_settings=None):
 
         self.homie_settings = homie_settings
         self.mqtt_settings = mqtt_settings

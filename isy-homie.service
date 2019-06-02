@@ -1,0 +1,13 @@
+[Unit]
+Description=ISY994 Homie
+After=multi-user.target
+
+[Service]
+User=pi
+Type=simple
+ExecStart=/usr/bin/python3 /usr/local/bin/isy_homie_start.py
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target
+
