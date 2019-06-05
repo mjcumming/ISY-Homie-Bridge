@@ -13,9 +13,11 @@ class Variable(Base,Device_Integer):
 
         Device_Integer.__init__ (self,device_id, isy_device.name, homie_settings, mqtt_settings)
 
+        '''
         value = self.isy_device.get_property('value')
         if value is not None:
             self.property_change('value',value)
+        '''
 
 
     def property_change(self,property_,value):

@@ -8,4 +8,5 @@ mqtt:
   MQTT_PORT: 1883
   MQTT_USERNAME: null
   MQTT_PASSWORD: null
+  MQTT_SHARED_CLIENT: false
 

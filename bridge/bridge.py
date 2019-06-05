@@ -3,13 +3,17 @@
 import time
 
 import platform
-
+'''
 if platform.system() == 'Windows':
     pass
     #win32file._setmaxstdio(2048)
 else:
     import resource
     resource.setrlimit(resource.RLIMIT_NOFILE, (65536, 65536))
+'''
+import logging
+logger = logging.getLogger(__name__)
+logger.setLevel('DEBUG')
 
 from ISY.controller import Controller
 
@@ -21,20 +25,15 @@ from .devices.controller_action import Controller_Action
 from .devices.scene import Scene
 from .devices.variable import Variable
 from .devices.program import Program
+from .devices.isy_controller import ISY_Controller
 
-import logging
 
-logger = logging.getLogger(__name__)
-logging.basicConfig(level=logging.INFO)
+
 
 
 HOMIE_SETTINGS = {
-    'version' : '3.0.1',
-    'topic' : 'homie', 
-    'fw_name' : 'isy994',
-    'fw_version' : '0.0.1', 
     'update_interval' : 60, 
-    'implementation' : 'HomieV3', 
+    'implementation' : 'ISY994', 
 }
 
 
@@ -45,9 +44,12 @@ class Bridge (object):
     homie_devices = {} #indexed by container_type,device_address
 
     def __init__(self, address=None, username=None, password=None, homie_settings=HOMIE_SETTINGS, mqtt_settings=None):
+        print (mqtt_settings)
 
         self.homie_settings = homie_settings
         self.mqtt_settings = mqtt_settings
+
+        self.gotavar = False
 
         self.controller = Controller(address=address,port=None,username=username,password=password,use_https=False,event_handler=self._isy_event_handler)
 
@@ -55,13 +57,20 @@ class Bridge (object):
         logger.info ('Event {} from {}: {} {}'.format(event,container.container_type,item.name,args))
 
         if container.container_type == 'Device':
-            self._device_event_handler (item,event,args)
+            #self._device_event_handler (item,event,args)
+            pass
         elif container.container_type == 'Scene':
-            self._scene_event_handler (item,event,args)
+            #self._scene_event_handler (item,event,args)
+            pass
         elif container.container_type == 'Variable':
             self._variable_event_handler (item,event,args)
+            pass
         elif container.container_type == 'Program':
-            self._program_event_handler (item,event,args)
+            #self._program_event_handler (item,event,args)
+            pass
+        elif container.container_type == 'Controller':
+            self._container_event_handler (item,event,args)
+
 
     def _device_event_handler(self,device,event,*args):
         #print ('device event',device.name,event,args)
@@ -83,11 +92,20 @@ class Bridge (object):
             scene = Scene (device,self.homie_settings,self.mqtt_settings)
 
     def _variable_event_handler(self,device,event,*args):
-        #print ('device event',device.name,event)
+        if self.gotavar:
+            return
+        print ('Variable event !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ',device.name,event)
+
         if event == 'add':
             variable = Variable (device,self.homie_settings,self.mqtt_settings)
+            self.gotavar = True
 
     def _program_event_handler(self,device,event,*args):
         #print ('device event',device.name,event)
         if event == 'add':
             program = Program (device,self.homie_settings,self.mqtt_settings)
+
+    def _container_event_handler(self,device,event,*args):
+        #print ('device event',device.name,event)
+        if event == 'add':
+            controller = ISY_Controller (device,self.homie_settings,self.mqtt_settings)
