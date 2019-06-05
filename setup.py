@@ -22,7 +22,6 @@ setuptools.setup(name='ISY994 Homie3 Bridge',
         'Homie3',
         'ISY994v5',
         'pyyaml',
-        'timer3'
     ],
     scripts=['isy_homie_start.py'],
 )
