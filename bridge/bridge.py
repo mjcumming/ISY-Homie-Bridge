@@ -52,7 +52,7 @@ class Bridge (object):
         self.controller = Controller(address=address,port=None,username=username,password=password,use_https=False,event_handler=self._isy_event_handler)
 
     def _isy_event_handler(self,container,item,event,*args):
-        logger.warn ('Event {} from {}: {} {}'.format(event,container.container_type,item.name,args))
+        logger.warn ('Event {} from {}: {} {}'.format(event,container.container_type,item.name,*args))
 
         if container.container_type == 'Device':
             self._device_event_handler (item,event,args)
@@ -68,7 +68,18 @@ class Bridge (object):
             pass
         elif container.container_type == 'Controller':
             self._container_event_handler (item,event,args)
+            print (event,item,args)
+            if event == 'property':
+                print ('args',args [0] [0], args[0] [1] )
 
+        if event == 'add':
+            time.sleep(.5)
+
+    '''
+                #print (args[0] [1])
+    def build_devices(self):
+        for _,device in self.controller.device_container.get_list_copy():
+    '''
 
     def _device_event_handler(self,device,event,*args):
         #print ('device event',device.name,event,args)
