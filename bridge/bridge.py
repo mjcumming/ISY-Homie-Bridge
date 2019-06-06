@@ -73,7 +73,8 @@ class Bridge (object):
                 print ('args',args [0] [0], args[0] [1] )
 
         if event == 'add':
-            time.sleep(.5)
+            pass
+            #time.sleep(.5)
 
     '''
                 #print (args[0] [1])
