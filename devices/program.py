@@ -1,6 +1,3 @@
-#! /usr/bin/env python
-
-
 #!/usr/bin/env python
 
 from homie.device_base import Device_Base

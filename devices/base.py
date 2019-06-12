@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 
 import re
-
+ 
 class Base(object):
 
     def __init__(self, isy_device=None):

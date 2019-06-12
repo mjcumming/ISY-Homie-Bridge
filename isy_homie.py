@@ -17,15 +17,15 @@ logger.setLevel('DEBUG')
 
 from ISY.controller import Controller
 
-from .devices.switch import Switch
-from .devices.dimmer import Dimmer
-from .devices.fan import Fan
-from .devices.contact import Contact
-from .devices.controller_action import Controller_Action
-from .devices.scene import Scene
-from .devices.variable import Variable
-from .devices.program import Program
-from .devices.isy_controller import ISY_Controller
+from devices.switch import Switch
+from devices.dimmer import Dimmer
+from devices.fan import Fan
+from devices.contact import Contact 
+from devices.controller_action import Controller_Action 
+from devices.scene import Scene
+from devices.variable import Variable
+from devices.program import Program
+from devices.isy_controller import ISY_Controller
 
 
 
@@ -37,14 +37,14 @@ HOMIE_SETTINGS = {
 }
 
 
-class Bridge (object):
+class ISY_Homie (object):
     
     controller = None
 
     homie_devices = {} #indexed by container_type,device_address
 
     def __init__(self, address=None, username=None, password=None, homie_settings=HOMIE_SETTINGS, mqtt_settings=None):
-        print (mqtt_settings)
+        log.debug('ISY Homie MQTT {}'.format (mqtt_settings))
 
         self.homie_settings = homie_settings
         self.mqtt_settings = mqtt_settings
@@ -68,9 +68,10 @@ class Bridge (object):
             pass
         elif container.container_type == 'Controller':
             self._container_event_handler (item,event,args)
-            print (event,item,args)
+            #print (event,item,args)
             if event == 'property':
-                print ('args',args [0] [0], args[0] [1] )
+                pass
+                #print ('args',args [0] [0], args[0] [1] )
 
         if event == 'add':
             pass
