@@ -2,49 +2,35 @@
 
 import time
 
-import platform
-'''
-if platform.system() == 'Windows':
-    pass
-    #win32file._setmaxstdio(2048)
-else:
-    import resource
-    resource.setrlimit(resource.RLIMIT_NOFILE, (65536, 65536))
-'''
 import logging
 logger = logging.getLogger(__name__)
 logger.setLevel('DEBUG')
 
-from ISY.controller import Controller
-
-from devices.switch import Switch
-from devices.dimmer import Dimmer
-from devices.fan import Fan
-from devices.contact import Contact 
-from devices.controller_action import Controller_Action 
-from devices.scene import Scene
-from devices.variable import Variable
-from devices.program import Program
-from devices.isy_controller import ISY_Controller
-
-
-
-
+from isy.controller import Controller 
+ 
+from .devices.switch import Switch
+from .devices.dimmer import Dimmer
+from .devices.fan import Fan
+from .devices.contact import Contact 
+from .devices.controller_action import Controller_Action 
+from .devices.scene import Scene
+from .devices.variable import Variable
+from .devices.program import Program
+from .devices.isy_controller import ISY_Controller
 
 HOMIE_SETTINGS = {
     'update_interval' : 60, 
     'implementation' : 'ISY994', 
 }
 
-
-class ISY_Homie (object):
+class Bridge (object):
     
     controller = None
 
     homie_devices = {} #indexed by container_type,device_address
 
     def __init__(self, address=None, username=None, password=None, homie_settings=HOMIE_SETTINGS, mqtt_settings=None):
-        log.debug('ISY Homie MQTT {}'.format (mqtt_settings))
+        logger.debug('ISY Homie MQTT {}'.format (mqtt_settings))
 
         self.homie_settings = homie_settings
         self.mqtt_settings = mqtt_settings
@@ -76,12 +62,6 @@ class ISY_Homie (object):
         if event == 'add':
             pass
             #time.sleep(.5)
-
-    '''
-                #print (args[0] [1])
-    def build_devices(self):
-        for _,device in self.controller.device_container.get_list_copy():
-    '''
 
     def _device_event_handler(self,device,event,*args):
         #print ('device event',device.name,event,args)
