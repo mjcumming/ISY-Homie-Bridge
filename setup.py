@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name='ISY994-Homie3-Bridge',
-    version='0.2.0',
+    version='0.2.1',
     description='Homie 3 for Universal Devices ISY994',
     author='Michael Cumming',
     author_email='mike@4831.com',

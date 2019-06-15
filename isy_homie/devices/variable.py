@@ -9,16 +9,15 @@ class Variable(Base,Device_Integer):
 
         Base.__init__ (self,isy_device)
 
-        device_id = 'variable-' + isy_device.get_index().replace(':','-')
-
-        Device_Integer.__init__ (self,device_id, isy_device.name, homie_settings, mqtt_settings)
+        Device_Integer.__init__ (self,self.get_homie_device_id(), isy_device.name, homie_settings, mqtt_settings)
 
         '''
         value = self.isy_device.get_property('value')
         if value is not None:
             self.property_change('value',value)
         '''
-
+    def get_homie_device_id (self):
+        return 'variable-' + Base.get_homie_device_id(self)
 
     def property_change(self,property_,value):
         if property_ == 'value':

@@ -27,6 +27,9 @@ class Program (Base,Device_Base):
 
         self.start()
 
+    def get_homie_device_id (self):
+        return 'program-' + Base.get_homie_device_id(self)
+
     def set_run_program (self,value):
         if value == 'RUNIF':
             self.isy_device.run ()

@@ -17,6 +17,9 @@ class Fan (Base,Device_Speed):
 
         self.start()
 
+    def get_homie_device_id (self):
+        return 'fan-' + Base.get_homie_device_id(self)
+
     def set_speed (self,speed):
         self.isy_device.set_speed(speed.lower())
             

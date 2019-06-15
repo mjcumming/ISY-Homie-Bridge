@@ -21,6 +21,9 @@ class Dimmer(Base,Device_Dimmer):
         if level is not None:
             self.property_change('level',level)
 
+    def get_homie_device_id (self):
+        return 'dimmer-' + Base.get_homie_device_id(self)
+
     def property_change(self,property_,value):
         if property_ == 'level':
             self.update_dimmer(value)

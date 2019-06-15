@@ -15,6 +15,8 @@ class Scene(Base,Device_Switch):
         if onoff is not None:
             self.property_change('onoff',onoff)
 
+    def get_homie_device_id (self):
+        return 'scene-' + Base.get_homie_device_id(self)
 
     def property_change(self,property_,value):
         if property_ == 'onoff':
