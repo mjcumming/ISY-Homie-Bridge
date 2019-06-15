@@ -23,6 +23,9 @@ class Controller_Action(Base,Device_Base):
 
         Device_Base.start(self)
 
+    def get_homie_device_id (self):
+        return 'controller-' + Base.get_homie_device_id(self)
+
     def property_change(self,property_,value):
         if property_ == 'paddle_action':
             self.paddle.value = value

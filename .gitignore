@@ -112,3 +112,5 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+.vscode/arduino.json
+.vscode/c_cpp_properties.json

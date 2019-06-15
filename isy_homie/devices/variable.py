@@ -16,8 +16,8 @@ class Variable(Base,Device_Integer):
         if value is not None:
             self.property_change('value',value)
         '''
-    def get_homie_device_id (self):
-        return 'variable-' + Base.get_homie_device_id(self)
+    def get_homie_device_id (self):        
+        return 'variable-' + Base.get_homie_device_id(self).replace(':','-')
 
     def property_change(self,property_,value):
         if property_ == 'value':
