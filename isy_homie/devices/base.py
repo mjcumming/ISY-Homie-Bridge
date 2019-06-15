@@ -9,7 +9,8 @@ class Base(object):
         self.isy_device.add_property_event_handler(self.property_change)
 
     def get_homie_device_id (self):
-        return re.sub(r'\W+', '', self.isy_device.name.lower())
+        #return re.sub(r'\W+', '', self.isy_device.name.lower())
+        return self.isy_device.get_identifier()
 
     def property_change(self,property_,value):
         pass
