@@ -6,6 +6,8 @@ import logging
 logger = logging.getLogger(__name__)
 logger.setLevel('DEBUG')
 
+import isy
+
 from isy.controller import Controller 
  
 from .devices.switch import Switch
@@ -21,6 +23,10 @@ from .devices.isy_controller import ISY_Controller
 HOMIE_SETTINGS = {
     'update_interval' : 60, 
     'implementation' : 'ISY994', 
+    'fw_name' : 'isy homie bridge',
+    'fw_version' : isy.__version__,
+ 
+
 }
 
 class Bridge (object):
@@ -92,6 +98,6 @@ class Bridge (object):
             program = Program (device,self.homie_settings,self.mqtt_settings)
 
     def _container_event_handler(self,device,event,*args):
-        #print ('device event',device.name,event)
+        print ('container event',device.name,event)
         if event == 'add':
             controller = ISY_Controller (device,self.homie_settings,self.mqtt_settings)

@@ -1,10 +1,10 @@
 isy:
-  url: 192.168.1.213
+  url: 192.168.2.73
   username: admin
   password: admin
 
 mqtt:
-  MQTT_BROKER: OpenHAB
+  MQTT_BROKER: isyhomie
   MQTT_PORT: 1883
   MQTT_USERNAME: null
   MQTT_PASSWORD: null
