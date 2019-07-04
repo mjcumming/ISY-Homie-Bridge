@@ -6,9 +6,7 @@ import logging
 logger = logging.getLogger(__name__)
 logger.setLevel('DEBUG')
 
-import isy
-
-from isy.controller import Controller 
+from isy994.controller import Controller 
  
 from .devices.switch import Switch
 from .devices.dimmer import Dimmer
