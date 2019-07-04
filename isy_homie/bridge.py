@@ -22,9 +22,7 @@ HOMIE_SETTINGS = {
     'update_interval' : 60, 
     'implementation' : 'ISY994', 
     'fw_name' : 'isy homie bridge',
-    'fw_version' : isy.__version__,
- 
-
+    'fw_version' : 0, # isy994.__version__,
 }
 
 class Bridge (object):
