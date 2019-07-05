@@ -20,6 +20,7 @@ class Controller_Action(Base,Device_Base):
         self.add_node(paddle_node)
 
         self.paddle = Property_String(paddle_node,'paddle-action','Paddle Action')
+        paddle_node.add_property(self.paddle)
 
         Device_Base.start(self)
 
