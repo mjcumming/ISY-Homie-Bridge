@@ -32,7 +32,7 @@ class ISY_Controller (Base,Device_Base):
         Device_Base.start(self)
 
     def property_change(self,property_,value):
-        print ('contoller',property_,value)
+        #print ('contoller',property_,value)
         if property_ == 'heartbeat':
             self.heartbeat.value = value.strftime("%m/%d/%Y, %H:%M:%S")
         elif property_ == 'state':

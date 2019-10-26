@@ -1,6 +1,6 @@
 # ISY-Homie
 
-A bridge between the ISY994 controller and [Homie 3 MQTT convention](https://homieiot.github.io/).
+A bridge between the ISY994 controller and [Homie 4 MQTT convention](https://homieiot.github.io/).
 
 Utilizes the [ISY944v5 package](https://pypi.org/project/ISY994v5/). Currently only supports Insteon devices, Insteon Scenes, ISY program, and ISY variables.
 

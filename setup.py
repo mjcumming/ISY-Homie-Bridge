@@ -5,9 +5,9 @@ with open("README.md", "r") as fh:
 
 
 setuptools.setup(
-    name='ISY994-Homie3-Bridge',
-    version='0.2.7',
-    description='Homie 3 for Universal Devices ISY994',
+    name='ISY994-Homie4-Bridge',
+    version='0.2.8',
+    description='Homie 4 for Universal Devices ISY994',
     author='Michael Cumming',
     author_email='mike@4831.com',
     long_description=long_description,
@@ -20,7 +20,7 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],      
     install_requires=[
-        'Homie3',
+        'Homie4',
         'ISY994v5',
         'pyyaml',
     ],

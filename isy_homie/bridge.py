@@ -94,6 +94,6 @@ class Bridge (object):
             program = Program (device,self.homie_settings,self.mqtt_settings)
 
     def _container_event_handler(self,device,event,*args):
-        print ('container event',device.name,event)
+        #print ('container event',device.name,event)
         if event == 'add':
             controller = ISY_Controller (device,self.homie_settings,self.mqtt_settings)
