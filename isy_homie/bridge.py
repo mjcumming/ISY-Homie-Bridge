@@ -16,6 +16,7 @@ from .devices.controller_action import Controller_Action
 from .devices.scene import Scene
 from .devices.variable import Variable
 from .devices.program import Program
+from .devices.thermostat import Thermostat
 from .devices.isy_controller import ISY_Controller
 
 HOMIE_SETTINGS = {
@@ -76,6 +77,8 @@ class Bridge (object):
                 fan = Fan (device,self.homie_settings,self.mqtt_settings)
             elif device.device_type == 'contact':
                 contact = Contact (device,self.homie_settings,self.mqtt_settings)
+            elif device.device_type == 'thermostat':
+                thermostat = Thermostat (device,self.homie_settings,self.mqtt_settings)
             elif device.device_type == 'controller':
                 controller = Controller_Action (device,self.homie_settings,self.mqtt_settings)
 
