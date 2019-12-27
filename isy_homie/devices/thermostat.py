@@ -3,12 +3,31 @@
 from homie.device_thermostat import Device_Thermostat
 from .base import Base
 
+
+THERMOSTAT_SETTINGS = {
+    'current_temperature' : 70,
+    'current_humidity' : 30,
+    'cool_setpoint' : 70,
+    'max_cool_setpoint' : 90,
+    'min_cool_setpoint' : 60,
+    'heat_setpoint' : 70,
+    'max_heat_setpoint' : 90,
+    'min_heat_setpoint' : 60,    
+    'fan_mode' : 'On',
+    'fan_modes' : ['On','Auto'],
+    'system_mode' : 'Off',
+    'system_modes' : ['Off','Heat','Cool','Auto'],
+    'system_status' : 'Off',
+    'units' : 'F',
+}
+
 props = [
     'temperature',
     'humidity',
     'heatsetpoint',
     'coolsetpoint',
     'systemmode',
+    'fanmode'
 ]
 
 class Thermostat(Base,Device_Thermostat):
@@ -18,12 +37,12 @@ class Thermostat(Base,Device_Thermostat):
         Base.__init__ (self,isy_device)
         print (isy_device.properties)
         Device_Thermostat.__init__ (self,self.get_homie_device_id(), isy_device.name, homie_settings, mqtt_settings)
-
+    
         for isy_prop in props:
             iprop_value = self.isy_device.get_property(isy_prop)
             if iprop_value is not None:
                 self.property_change(isy_prop,iprop_value)
-
+   
     def get_homie_device_id (self):
         return 'thermostat-' + Base.get_homie_device_id(self)
 
@@ -38,6 +57,8 @@ class Thermostat(Base,Device_Thermostat):
             self.update_cool_setpoint(value)
         elif property_ == 'systemmode':
             self.update_system_mode(value)
+        elif property_ == 'fanmode':
+            self.update_fan_mode(value)
 
         Base.property_change (self,property_,value)
 

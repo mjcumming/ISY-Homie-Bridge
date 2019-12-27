@@ -14,7 +14,7 @@ class Dimmer(Base,Device_Dimmer):
         Device_Dimmer.__init__ (self,self.get_homie_device_id(), isy_device.name, homie_settings, mqtt_settings)
         
         node = self.get_node ('dimmer')
-        self.paddle = Property_String(node,'paddle-action','Paddle Action')
+        self.paddle = Property_String(node,'paddleaction','Paddle Action')
         node.add_property(self.paddle)
 
         level = self.isy_device.get_property('level')
