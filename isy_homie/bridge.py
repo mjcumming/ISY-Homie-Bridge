@@ -9,6 +9,7 @@ logger.setLevel('DEBUG')
 from isy994.controller import Controller 
 import isy994
 import homie 
+import isy_homie
  
 from .devices.switch import Switch
 from .devices.dimmer import Dimmer
@@ -23,7 +24,7 @@ from .devices.isy_controller import ISY_Controller
 
 HOMIE_SETTINGS = {
     'update_interval' : 60, 
-    'implementation' : 'Homie 4 Version {}'.format(homie.__version__), 
+    'implementation' : 'ISY Bridge Version {} Homie 4 Version {}'.format(isy_homie.__version__,homie.__version__), 
     'fw_name' : 'ISY994V5',
     'fw_version' : isy994.__version__,
 }
