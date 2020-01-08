@@ -7,6 +7,8 @@ logger = logging.getLogger(__name__)
 logger.setLevel('DEBUG')
 
 from isy994.controller import Controller 
+import isy994
+import homie 
  
 from .devices.switch import Switch
 from .devices.dimmer import Dimmer
@@ -21,9 +23,9 @@ from .devices.isy_controller import ISY_Controller
 
 HOMIE_SETTINGS = {
     'update_interval' : 60, 
-    'implementation' : 'ISY994', 
-    'fw_name' : 'isy homie bridge',
-    'fw_version' : 0, # isy994.__version__,
+    'implementation' : 'Homie 4 Version {}'.format(homie.__version__), 
+    'fw_name' : 'ISY994V5',
+    'fw_version' : isy994.__version__,
 }
 
 class Bridge (object):
