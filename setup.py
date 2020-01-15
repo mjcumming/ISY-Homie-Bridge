@@ -6,14 +6,14 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name='ISY994-Homie4-Bridge',
-    version='0.3.0',
+    version='0.3.1',
     description='Homie 4 for Universal Devices ISY994',
     author='Michael Cumming',
     author_email='mike@4831.com',
     long_description=long_description,
     long_description_content_type="text/markdown",      
     url='https://github.com/mjcumming/ISY-Homie-Bridge',
-    keywords = ['HOMIE','MQTT','ISY99','Universal Devices'],  
+    keywords = ['HOMIE','MQTT','ISY994','ISY','Universal Devices','zWave','Insteon'],  
     packages=setuptools.find_packages(),
     classifiers=[
         "License :: OSI Approved :: MIT License",
@@ -21,7 +21,7 @@ setuptools.setup(
     ],      
     install_requires=[
         'Homie4>=0.1.7',
-        'ISY994v5>=0.5.2',
+        'ISY994v5>=0.5.4',
         'pyyaml',
     ],
     scripts=['isy_homie_start.py'],
