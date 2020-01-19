@@ -42,5 +42,12 @@ class ISY_Controller (Base,Device_Base):
         elif property_ == 'websocket':
             self.websocket_connected.value = value
 
+        if self.htpp_connected.value != 'connected' or self.websocket_connected.value != 'connected':
+            if self.state != 'alert':
+                self.state = 'alert'
+        else:        
+            if self.state != 'ready':
+                self.state = 'ready'
+
         Base.property_change (self,property_,value)
 

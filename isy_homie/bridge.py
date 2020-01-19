@@ -33,7 +33,7 @@ class Bridge (object):
     
     controller = None
 
-    homie_devices = {} #indexed by container_type,device_address
+    homie_devices = {} #indexed by item identifier
 
     def __init__(self, address=None, username=None, password=None, homie_settings=HOMIE_SETTINGS, mqtt_settings=None):
         logger.debug('ISY Homie MQTT {}'.format (mqtt_settings))
@@ -44,62 +44,61 @@ class Bridge (object):
         self.controller = Controller(address=address,port=None,username=username,password=password,use_https=False,event_handler=self._isy_event_handler)
 
     def _isy_event_handler(self,container,item,event,*args):
-        logger.warn ('Event {} from {}: {} {}'.format(event,container.container_type,item.name,*args))
+        logger.warning ('Event {} from {}: {} {}'.format(event,container.container_type,item.name,*args))
 
         if container.container_type == 'Device':
             self._device_event_handler (item,event,args)
-            pass
         elif container.container_type == 'Scene':
             self._scene_event_handler (item,event,args)
-            pass
         elif container.container_type == 'Variable':
             self._variable_event_handler (item,event,args)
-            pass
         elif container.container_type == 'Program':
             self._program_event_handler (item,event,args)
-            pass
         elif container.container_type == 'Controller':
-            self._container_event_handler (item,event,args)
-            #print (event,item,args)
-            if event == 'property':
-                pass
-                #print ('args',args [0] [0], args[0] [1] )
-
-        if event == 'add':
-            pass
-            #time.sleep(.5)
+            self._controller_event_handler (item,event,args)
 
     def _device_event_handler(self,device,event,*args):
         #print ('device event',device.name,event,args)
         if event == 'add':
             if device.device_type == 'switch':
-                switch = Switch (device,self.homie_settings,self.mqtt_settings)
+                device = Switch (device,self.homie_settings,self.mqtt_settings)
             elif device.device_type == 'dimmer':
-                switch = Dimmer (device,self.homie_settings,self.mqtt_settings)
+                device = Dimmer (device,self.homie_settings,self.mqtt_settings)
             elif device.device_type == 'fan':
-                fan = Fan (device,self.homie_settings,self.mqtt_settings)
+                device = Fan (device,self.homie_settings,self.mqtt_settings)
             elif device.device_type == 'contact':
-                contact = Contact (device,self.homie_settings,self.mqtt_settings)
+                device = Contact (device,self.homie_settings,self.mqtt_settings)
             elif device.device_type == 'thermostat':
-                thermostat = Thermostat (device,self.homie_settings,self.mqtt_settings)
+                device = Thermostat (device,self.homie_settings,self.mqtt_settings)
             elif device.device_type == 'controller':
-                controller = Controller_Action (device,self.homie_settings,self.mqtt_settings)
+                device = Controller_Action (device,self.homie_settings,self.mqtt_settings)
+
+            self.homie_devices[device.get_homie_device_id()]=device
 
     def _scene_event_handler(self,device,event,*args):
         #print ('device event',device.name,event)
         if event == 'add':
             scene = Scene (device,self.homie_settings,self.mqtt_settings)
+            self.homie_devices[scene.get_homie_device_id()]=scene
 
     def _variable_event_handler(self,device,event,*args):
         if event == 'add':
             variable = Variable (device,self.homie_settings,self.mqtt_settings)
+            self.homie_devices[variable.get_homie_device_id()]=variable
 
     def _program_event_handler(self,device,event,*args):
         #print ('device event',device.name,event)
         if event == 'add':
             program = Program (device,self.homie_settings,self.mqtt_settings)
+            self.homie_devices[program.get_homie_device_id()] = program
 
-    def _container_event_handler(self,device,event,*args):
+    def _controller_event_handler(self,device,event,*args):
         #print ('container event',device.name,event)
         if event == 'add':
             controller = ISY_Controller (device,self.homie_settings,self.mqtt_settings)
+            self.homie_devices[controller.get_homie_device_id()]=controller
+
+        #if event == 'property':
+         #   if args [0] [0] == 'state' and args[0] [1] == 'lost'
+          #      pass # could propagate this to all devices
+                #print ('args',args [0] [0], args[0] [1] )
