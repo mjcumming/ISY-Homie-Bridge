@@ -8,11 +8,9 @@ import logging
 from logging.handlers import TimedRotatingFileHandler
 
 logger = logging.getLogger(__name__)
-logger.setLevel("DEBUG")
-
 
 FORMATTER = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
-LOG_FILE = os.path.expanduser("~") + "/isy bridge.log"
+LOG_FILE = os.path.expanduser("~") + "/isybridge.log"
 
 console_handler = logging.StreamHandler(sys.stdout)
 console_handler.setFormatter(FORMATTER)
@@ -20,15 +18,10 @@ console_handler.setFormatter(FORMATTER)
 file_handler = TimedRotatingFileHandler(LOG_FILE, when="midnight")
 file_handler.setFormatter(FORMATTER)
 
-
-logger.setLevel(logging.DEBUG)  # better to have too much log than not enough
-
 logger.addHandler(console_handler)
 logger.addHandler(file_handler)
 
-# with this pattern, it's rarely necessary to propagate the error up to parent
-# logger.propagate = False
-
+logging.basicConfig(level=logging.INFO,handlers=[file_handler,console_handler])
 
 from isy994.controller import Controller
 import isy994
