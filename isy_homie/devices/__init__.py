@@ -1,1 +1,2 @@
-name='devices'
+name = "devices"
+

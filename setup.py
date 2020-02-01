@@ -20,8 +20,8 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],      
     install_requires=[
-        'Homie4>=0.1.7',
-        'ISY994v5>=0.6.2',
+        'Homie4>=0.2.0',
+        'ISY994v5>=0.6.9',
         'pyyaml',
     ],
     scripts=['isy_homie_start.py'],

@@ -13,7 +13,7 @@ try:
     bridge = Bridge (address=cfg['isy'] ['url'], username=cfg['isy'] ['username'],password=cfg['isy'] ['password'],mqtt_settings=cfg['mqtt'])
     
     while True:
-        time.sleep(10)
+        time.sleep(1)
 
 except (KeyboardInterrupt, SystemExit):
     print("Quitting.")     
