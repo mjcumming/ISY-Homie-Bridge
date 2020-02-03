@@ -63,7 +63,7 @@ class Bridge(object):
         homie_settings=HOMIE_SETTINGS,
         mqtt_settings=None,
     ):
-        logger.debug("ISY Homie MQTT {}".format(mqtt_settings))
+        logger.info("ISY Homie MQTT {}".format(mqtt_settings))
 
         self.homie_settings = homie_settings
         self.mqtt_settings = mqtt_settings
@@ -145,3 +145,6 @@ class Bridge(object):
         #      pass # could propagate this to all devices
         # print ('args',args [0] [0], args[0] [1] )
 
+    def close(self):
+        for device in self.homie_devices:
+            device.close()
