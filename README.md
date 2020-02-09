@@ -2,7 +2,14 @@
 
 A bridge between the ISY994 controller and [Homie 4 MQTT convention](https://homieiot.github.io/).
 
-Utilizes the [ISY944v5 package](https://pypi.org/project/ISY994v5/). Currently only supports Insteon devices, Insteon Scenes, ISY program, and ISY variables.
+Utilizes the [ISY944v5 package](https://pypi.org/project/ISY994v5/). 
+
+Currently supports 
+    Insteon dimmers, switches, keypadlincs, fanlincs, templinc and contact devices
+    ZWave locks and switches
+    ISY Scenes
+    ISY Programs
+    ISY Variables
 
 To start as a service on raspbian 
 

@@ -10,7 +10,8 @@ class Base(object):
 
     def get_homie_device_id(self):
         # return re.sub(r'\W+', '', self.isy_device.name.lower())
-        return self.isy_device.get_identifier().replace(" ", "").lower()
+        #return self.isy_device.get_identifier().replace(" ", "").lower()
+        return self.isy_device.get_identifier().replace(" ", "").replace("_", "").lower()
 
     def property_change(self, property_, value):
         pass
