@@ -12,7 +12,12 @@ with open("isy_homie.yml", 'r') as ymlfile:
 bridge = None
 
 try:
-    bridge = Bridge (address=cfg['isy'] ['url'], username=cfg['isy'] ['username'],password=cfg['isy'] ['password'],mqtt_settings=cfg['mqtt'])
+    if 'logging' in cfg:
+        logging = cfg ['logging']
+    else:
+        logging = None
+
+    bridge = Bridge (address=cfg['isy'] ['url'], username=cfg['isy'] ['username'],password=cfg['isy'] ['password'],mqtt_settings=cfg['mqtt'],log_settings=logging)
 
     while True:
         time.sleep(1)

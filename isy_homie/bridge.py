@@ -15,13 +15,11 @@ LOG_FILE = os.path.expanduser("~") + "/isybridge.log"
 console_handler = logging.StreamHandler(sys.stdout)
 console_handler.setFormatter(FORMATTER)
 
-file_handler = TimedRotatingFileHandler(LOG_FILE, when="midnight")
+file_handler = TimedRotatingFileHandler(LOG_FILE, backupCount=5, when="midnight")
 file_handler.setFormatter(FORMATTER)
 
 logger.addHandler(console_handler)
 logger.addHandler(file_handler)
-
-logging.basicConfig(level=logging.INFO,handlers=[file_handler,console_handler])
 
 from isy994.controller import Controller
 import isy994
@@ -49,6 +47,11 @@ HOMIE_SETTINGS = {
     "fw_version": isy994.__version__,
 }
 
+LOG_SETTINGS = {
+    'enable': False,
+    'level': logging.ERROR,
+}
+
 
 class Bridge(object):
 
@@ -63,7 +66,12 @@ class Bridge(object):
         password=None,
         homie_settings=HOMIE_SETTINGS,
         mqtt_settings=None,
+        log_settings = LOG_SETTINGS,
     ):
+        
+        if log_settings is not None and log_settings['enable'] is True:
+            logging.basicConfig(level=log_settings ['level'],handlers=[file_handler,console_handler])
+
         logger.info("ISY Homie MQTT {}".format(mqtt_settings))
 
         self.homie_settings = homie_settings

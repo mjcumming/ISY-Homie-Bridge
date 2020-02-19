@@ -10,3 +10,6 @@ mqtt:
   MQTT_PASSWORD: null
   MQTT_SHARE_CLIENT: true
 
+logging:
+  enable: true
+  level: DEBUG
