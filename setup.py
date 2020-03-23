@@ -16,6 +16,7 @@ setuptools.setup(
     keywords = ['HOMIE','MQTT','ISY994','ISY','Universal Devices','zWave','Insteon'],  
     packages=setuptools.find_packages(),
     classifiers=[
+        "Development Status :: 5 - Production/Stable",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],      

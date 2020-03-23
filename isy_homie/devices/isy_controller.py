@@ -25,8 +25,8 @@ class ISY_Controller(Base, Device_Base):
         self.state_busy = Property_String(node, "state", "State")
         node.add_property(self.state_busy)
 
-        self.htpp_connected = Property_String(node, "http", "HTTP Status")
-        node.add_property(self.htpp_connected)
+        self.http_connected = Property_String(node, "http", "HTTP Status")
+        node.add_property(self.http_connected)
 
         self.websocket_connected = Property_String(
             node, "websocket", "Websocket Status"
@@ -42,12 +42,12 @@ class ISY_Controller(Base, Device_Base):
         elif property_ == "state":
             self.state_busy.value = value
         elif property_ == "http":
-            self.htpp_connected.value = value
+            self.http_connected.value = value
         elif property_ == "websocket":
             self.websocket_connected.value = value
 
         if (
-            self.htpp_connected.value != "connected"
+            self.http_connected.value != "connected"
             or self.websocket_connected.value != "connected"
         ):
             if self.state != "alert":
