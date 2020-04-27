@@ -11,41 +11,55 @@ Currently supports
     ISY Programs
     ISY Variables
 
-To start as a service on raspbian 
 
-Create isy_homie.yml in /etc using the following settings:
+To install:
+```
+pip3 install ISY994-Homie4-Bridge --user 
+```
+
+To start as a service on raspbian:
+
+Create isy_homie.yml in /home/pi using the following settings:
 
 
 ```yaml
 isy:
   url: xxx.xxx.xxx.xxx
-  username: xxxxx
-  password: xxxxx
+  username: admin
+  password: admin
 
 mqtt:
-  MQTT_BROKER: broker
+  MQTT_BROKER: localhost
   MQTT_PORT: 1883
   MQTT_USERNAME: null
   MQTT_PASSWORD: null
   MQTT_SHARE_CLIENT: true
-  ```
 
-  Create isy-homie.service in /etc/systemd/system
+logging:
+  enable: true
+  level: ERROR
+```
 
-  ```service
+Create `isy-homie.service` in `/etc/systemd/system`
+
+```service
 [Unit]
-Description=ISY995 Homie
+Description=ISY994 Homie
 After=multi-user.target
 
 [Service]
 User=pi
 Type=simple
-ExecStart=/usr/bin/python3 /usr/local/bin/isy_homie_start.py
+WorkingDirectory=/home/pi
+ExecStart=/usr/bin/python3 /home/pi/.local/bin/isy_homie_start.py
 Restart=on-abort
 
 [Install]
 WantedBy=multi-user.target
 ```
 
-
-
+Then, start the service and enable launch on start up:
+```sh
+sudo service start isy-homie
+sudo systemctl enable isy-homie
+```

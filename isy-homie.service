@@ -5,7 +5,8 @@ After=multi-user.target
 [Service]
 User=pi
 Type=simple
-ExecStart=/usr/bin/python3 /usr/local/bin/isy_homie_start.py
+WorkingDirectory=/home/pi
+ExecStart=/usr/bin/python3 /home/pi/.local/bin/isy_homie_start.py
 Restart=on-abort
 
 [Install]
