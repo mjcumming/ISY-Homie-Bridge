@@ -26,17 +26,21 @@ import isy994
 import homie
 import isy_homie
 
-from .devices.switch import Switch
-from .devices.dimmer import Dimmer
-from .devices.fan import Fan
+from .devices.barrier import Barrier
+from .devices.binary import Binary
 from .devices.contact import Contact
 from .devices.controller_action import Controller_Action
-from .devices.scene import Scene
-from .devices.variable import Variable
-from .devices.program import Program
-from .devices.thermostat import Thermostat
-from .devices.siren import Siren
+from .devices.dimmer import Dimmer
+from .devices.door_lock import Door_Lock
+from .devices.fan import Fan
 from .devices.isy_controller import ISY_Controller
+from .devices.notification_sensor import Notification_Sensor
+from .devices.program import Program
+from .devices.scene import Scene
+from .devices.siren import Siren
+from .devices.switch import Switch
+from .devices.thermostat import Thermostat
+from .devices.variable import Variable
 
 HOMIE_SETTINGS = {
     "update_interval": 60,
@@ -107,18 +111,26 @@ class Bridge(object):
     def _device_event_handler(self, device, event, *args):
         logger.debug("Device event {}".format(device.name, event, args))
         if event == "add":
-            if device.device_type == "switch":
-                device = Switch(device, self.homie_settings, self.mqtt_settings)
+            if device.device_type == "binary":
+                device = Binary(device, self.homie_settings, self.mqtt_settings)
+            elif device.device_type == "barrier":
+                device = Barrier(device, self.homie_settings, self.mqtt_settings)
+            elif device.device_type == "contact":
+                device = Contact(device, self.homie_settings, self.mqtt_settings)
             elif device.device_type == "dimmer":
                 device = Dimmer(device, self.homie_settings, self.mqtt_settings)
             elif device.device_type == "fan":
                 device = Fan(device, self.homie_settings, self.mqtt_settings)
-            elif device.device_type == "contact":
-                device = Contact(device, self.homie_settings, self.mqtt_settings)
+            elif device.device_type == "lock":
+                device = Door_Lock(device, self.homie_settings, self.mqtt_settings)
+            elif device.device_type == "notification":
+                device = Notification_Sensor(device, self.homie_settings, self.mqtt_settings)
             elif device.device_type == "thermostat":
                 device = Thermostat(device, self.homie_settings, self.mqtt_settings)
             elif device.device_type == "siren":
                 device = Siren(device, self.homie_settings, self.mqtt_settings)
+            elif device.device_type == "switch":
+                device = Switch(device, self.homie_settings, self.mqtt_settings)
             elif device.device_type == "controller":
                 device = Controller_Action(
                     device, self.homie_settings, self.mqtt_settings
