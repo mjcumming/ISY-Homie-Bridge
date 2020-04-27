@@ -122,3 +122,5 @@ dmypy.json
 #PyCharm
 .idea/
 isy_homie.yml
+
+.DS_Store
