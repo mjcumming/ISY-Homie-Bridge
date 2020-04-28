@@ -12,6 +12,12 @@ Currently supports
     ISY Variables
 
 
+Example usage:
+```sh
+mosquitto_pub -t 'homie/switch-334455a/switch/switch/set' -m false # turn light off
+mosquitto_pub -t 'homie/switch-334455a/switch/switch/set' -m true # turn light on
+```
+
 To install:
 ```
 pip3 install ISY994-Homie4-Bridge --user 
