@@ -72,7 +72,7 @@ class Bridge(object):
         mqtt_settings=None,
         log_settings = LOG_SETTINGS,
     ):
-        
+
         if log_settings is not None and log_settings['enable'] is True:
             logging.basicConfig(level=log_settings ['level'],handlers=[file_handler,console_handler])
 
@@ -111,32 +111,36 @@ class Bridge(object):
     def _device_event_handler(self, device, event, *args):
         logger.debug("Device event {}".format(device.name, event, args))
         if event == "add":
+            bridge_device = None
             if device.device_type == "binary":
-                device = Binary(device, self.homie_settings, self.mqtt_settings)
+                bridge_device = Binary(device, self.homie_settings, self.mqtt_settings)
             elif device.device_type == "barrier":
-                device = Barrier(device, self.homie_settings, self.mqtt_settings)
+                bridge_device = Barrier(device, self.homie_settings, self.mqtt_settings)
             elif device.device_type == "contact":
-                device = Contact(device, self.homie_settings, self.mqtt_settings)
+                bridge_device = Contact(device, self.homie_settings, self.mqtt_settings)
             elif device.device_type == "dimmer":
-                device = Dimmer(device, self.homie_settings, self.mqtt_settings)
+                bridge_device = Dimmer(device, self.homie_settings, self.mqtt_settings)
             elif device.device_type == "fan":
-                device = Fan(device, self.homie_settings, self.mqtt_settings)
+                bridge_device = Fan(device, self.homie_settings, self.mqtt_settings)
             elif device.device_type == "lock":
-                device = Door_Lock(device, self.homie_settings, self.mqtt_settings)
+                bridge_device = Door_Lock(device, self.homie_settings, self.mqtt_settings)
             elif device.device_type == "notification":
-                device = Notification_Sensor(device, self.homie_settings, self.mqtt_settings)
+                bridge_device = Notification_Sensor(device, self.homie_settings, self.mqtt_settings)
             elif device.device_type == "thermostat":
-                device = Thermostat(device, self.homie_settings, self.mqtt_settings)
+                bridge_device = Thermostat(device, self.homie_settings, self.mqtt_settings)
             elif device.device_type == "siren":
-                device = Siren(device, self.homie_settings, self.mqtt_settings)
+                bridge_device = Siren(device, self.homie_settings, self.mqtt_settings)
             elif device.device_type == "switch":
-                device = Switch(device, self.homie_settings, self.mqtt_settings)
+                bridge_device = Switch(device, self.homie_settings, self.mqtt_settings)
             elif device.device_type == "controller":
-                device = Controller_Action(
+                bridge_device = Controller_Action(
                     device, self.homie_settings, self.mqtt_settings
                 )
 
-            self.homie_devices[device.get_homie_device_id()] = device
+            if bridge_device is not None:
+                self.homie_devices[bridge_device.get_homie_device_id()] = bridge_device
+            else:
+                logger.warning("Unknown device {}".format(device))
 
     def _scene_event_handler(self, device, event, *args):
         logger.debug("Scene event {}".format(device.name, event))
