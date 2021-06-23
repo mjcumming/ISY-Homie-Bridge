@@ -11,16 +11,20 @@ Currently supports
     ISY Programs
     ISY Variables
 
-To start as a service on raspbian 
+# To start as a service on Raspbian: 
 
-Create isy_homie.yml in /etc using the following settings:
+Use pip3 to install, not pip
+   
+Create isy_homie.yml in /etc 
+  sudo nano /etc/isy_homie.yml
 
+Copy the following into that file, change the defaults and save
 
 ```yaml
 isy:
   url: xxx.xxx.xxx.xxx
-  username: xxxxx
-  password: xxxxx
+  username: admin
+  password: admin
 
 mqtt:
   MQTT_BROKER: broker
@@ -30,7 +34,11 @@ mqtt:
   MQTT_SHARE_CLIENT: true
   ```
 
-  Create isy-homie.service in /etc/systemd/system
+Create isy-homie.service in /etc/systemd/system
+  sudo nano /etc/systemd/system/isy-homie.service
+
+Copy the following into that file, change the User from pi if needed, and save
+
 
   ```service
 [Unit]
@@ -47,5 +55,7 @@ Restart=on-abort
 WantedBy=multi-user.target
 ```
 
+Copy the file isy_home_start.py from the github repository to /usr/local/bin
 
+sudo systemctl start isy-homie
 

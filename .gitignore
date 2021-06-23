@@ -122,3 +122,4 @@ dmypy.json
 #PyCharm
 .idea/
 isy_homie.yml
+.vscode/settings.json
