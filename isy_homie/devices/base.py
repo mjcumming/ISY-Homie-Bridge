@@ -14,6 +14,8 @@ class Base(object):
         return self.isy_device.get_identifier().replace(" ", "").replace("_", "").lower()
 
     def property_change(self, property_, value):
-        pass
         # print ('property change',self,property_,value)
+        if property_ == "status":
+            self.status == value # homie and isy994 use same values
+
 
