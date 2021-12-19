@@ -27,6 +27,8 @@ class Switch(Base, Device_Switch):
         if onoff is not None:
             self.property_change("onoff", onoff)
 
+        self.state = self.isy_device.get_property("status")
+
     def get_homie_device_id(self):
         return "switch-" + Base.get_homie_device_id(self)
 

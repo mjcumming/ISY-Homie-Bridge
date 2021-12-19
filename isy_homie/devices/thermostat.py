@@ -35,6 +35,7 @@ class Thermostat(Base, Device_Thermostat):
     def __init__(self, isy_device=None, homie_settings=None, mqtt_settings=None):
 
         Base.__init__(self, isy_device)
+
         Device_Thermostat.__init__(
             self,
             self.get_homie_device_id(),

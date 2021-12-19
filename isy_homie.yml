@@ -4,7 +4,7 @@ isy:
   password: admin
 
 mqtt:
-  MQTT_BROKER: openhab
+  MQTT_BROKER: 192.168.1.81
   MQTT_PORT: 1883
   MQTT_USERNAME: null
   MQTT_PASSWORD: null
