@@ -37,6 +37,8 @@ class Program(Base, Device_Base):
         )
         node.add_property(self.run)
 
+        self.add_communication_error_property()
+
         self.start()
 
     def get_homie_device_id(self):

@@ -21,6 +21,8 @@ class Controller_Action(Base, Device_Base):
             mqtt_settings,
         )
 
+        self.add_communication_error_property()
+
         paddle_node = Node_Base(self, id="paddle", name="paddle", type_="paddle")
         self.add_node(paddle_node)
 

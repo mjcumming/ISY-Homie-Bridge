@@ -24,6 +24,8 @@ class Siren(Base, Device_Switch):
         node.add_property(self.duration)
         self.duration.value = 0
 
+        self.add_communication_error_property()
+
         onoff = self.isy_device.get_property("onoff")
         if onoff is not None:
             self.property_change("onoff", onoff)

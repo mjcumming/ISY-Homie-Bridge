@@ -17,10 +17,12 @@ class Contact(Base, Device_Contact):
             mqtt_settings,
         )
 
+        self.add_communication_error_property()
+
         contact = self.isy_device.get_property("contact")
         if contact is not None:
             self.property_change("contact", contact)
-
+       
     def get_homie_device_id(self):
         return "contact-" + Base.get_homie_device_id(self)
 

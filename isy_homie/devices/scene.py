@@ -21,6 +21,8 @@ class Scene(Base, Device_Switch):
         if onoff is not None:
             self.property_change("onoff", onoff)
 
+        self.add_communication_error_property()
+
     def get_homie_device_id(self):
         return "scene-" + Base.get_homie_device_id(self)
 

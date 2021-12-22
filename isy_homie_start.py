@@ -5,7 +5,7 @@ import yaml
 
 from isy_homie.bridge import Bridge
 
-with open("\etc\isy_homie.yml", 'r') as ymlfile:
+with open("/etc/isy_homie.yml", 'r') as ymlfile:
     cfg = yaml.full_load(ymlfile)
 
 bridge = None

@@ -21,6 +21,8 @@ class Fan(Base, Device_Speed):
             mqtt_settings,
         )
 
+        self.add_communication_error_property()
+
         self.start()
 
     def get_homie_device_id(self):

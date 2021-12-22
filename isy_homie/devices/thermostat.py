@@ -49,6 +49,8 @@ class Thermostat(Base, Device_Thermostat):
             if iprop_value is not None:
                 self.property_change(isy_prop, iprop_value)
 
+        self.add_communication_error_property()
+
     def get_homie_device_id(self):
         return "thermostat-" + Base.get_homie_device_id(self)
 

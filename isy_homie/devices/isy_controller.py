@@ -33,6 +33,8 @@ class ISY_Controller(Base, Device_Base):
         )
         node.add_property(self.websocket_connected)
 
+        self.add_communication_error_property()
+
         Device_Base.start(self)
 
     def property_change(self, property_, value):
